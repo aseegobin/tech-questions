@@ -18,15 +18,12 @@ function Braces(values) {
         console.error("array is invalid length");
         return;
     }
-    
     var openBraces = "([{";
-    var closeBraces = ")]}";
     
     var valid = [];
 
     //iterate through array of string elements
     for (i = 0; i < values.length; i++) {
-        var valid;
 
         if (values[i].length < 1 || values[i].length > 100) {
             console.error("value has invalid length");
@@ -35,26 +32,64 @@ function Braces(values) {
 
         if ((values[i].length/2).toString().split('.').length != 1) {
             //size of braces string is not even, therefore automatically
-            //there it is invalid
+            //that it is invalid
             valid.push('NO');
-            return;
+        } else {
+            valid.push(checkBraces(values[i].split('')));
         }
         
-        var bracesArray = values[i].split('');
-        
-        if ( closeBraces.indexOf(bracesArray[0]) >=0 ) {
-            valid.push('NO');
-            return;
-        }
-        
-        bracesArray.forEach(function(character) {
-            //iterate through each character in the string
-            //to determine whether or not there is a pair
-
-        });
-        
-
     };
-    return valid;
+
+    console.log(valid);
 }
 
+function checkBraces(arrayOfBraces) {
+    var closeBraces = ")]}";
+
+    var openBracesCountMap = {
+        '(': 0,
+        '[': 0,
+        '{': 0
+    };
+
+    var closeBraceMap = {
+        ')': '(',
+        ']': '[',
+        '}': '{'
+    };
+    var bracesArray = arrayOfBraces;
+    
+    if ( closeBraces.indexOf(bracesArray[0]) >=0 ) {
+        //if first character is a close brace
+        // automatically its invalid
+        return 'NO';
+    }
+
+    bracesArray.forEach(function(character) {
+        //iterate through each character in the string
+        if (closeBraces.indexOf(character) >=0) {
+            //if character is a close brace then decrement count
+            // of open braces
+            if ( openBracesCountMap[closeBraceMap[character]] == 0) {
+                //if there is a close brace that has no matching 
+                // open brace, the openbracecount is already 0 and cannot
+                // be decremented, therefore string is invalid.
+
+               return 'NO';
+            } else {
+                openBracesCountMap[closeBraceMap[character]]--;
+            }
+        } else {
+            // character is an open brace so we increment the
+            // count of open braces
+            openBracesCountMap[character]++
+        }
+    });
+
+    if (openBracesCountMap['('] + openBracesCountMap['{'] + openBracesCountMap['['] == 0) {
+        return 'YES';
+    }
+    else {
+        return 'NO';
+    }
+};
