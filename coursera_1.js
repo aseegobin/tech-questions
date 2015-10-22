@@ -10,13 +10,24 @@
 // n = 5, fib3(5) => 7
 function fib3(n) {
     var tempFib = [0,1,1];
+    
+    var twoBack = tempFib[0];
+    var oneBack = tempFib[1];
+    var current = tempFib[2];
+    var temp;
+
     if (n <= 2) {
         return tempFib[n];
     } 
+
     for (i = 2; i < n; i++) {
-        tempFib.push(tempFib[i-2] + tempFib[i-1] + tempFib[i]);
+        temp = twoBack + oneBack + current;
+        twoBack = oneBack;
+        oneBack = current;
+        current = temp;
     }
-    return tempFib[n]
+
+    return current;
 }
 
 console.log(fib3(7));
