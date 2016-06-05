@@ -1,0 +1,24 @@
+{
+  "name": "tech-questions",
+  "version": "1.0.0",
+  "description": "Technical questions I've answered in various interviews",
+  "main": "",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.9.0",
+    "babel-preset-es2015": "^6.9.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aseegobin/tech-questions.git"
+  },
+  "author": "Avie Seegobin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aseegobin/tech-questions/issues"
+  },
+  "homepage": "https://github.com/aseegobin/tech-questions#readme"
+}
